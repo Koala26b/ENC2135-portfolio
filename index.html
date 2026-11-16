@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nathan Ho | ENC 2135 Electronic Portfolio</title>
+  <style>
+    :root {
+      --garnet: #782F40;
+      --garnet-dark: #571f2c;
+      --gold: #CEB888;
+      --gold-light: #f4efe4;
+      --bg: #f9f8f6;
+      --surface: #ffffff;
+      --text: #1f2421;
+      --muted: #5a626a;
+      --border: #e2dcd3;
+      --highlight-bg: #fff8dc;
+      --highlight-border: #CEB888;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    /* Navigation & Header */
+    header {
+      background: linear-gradient(135deg, var(--garnet-dark), var(--garnet));
+      color: #ffffff;
+      padding: 3rem 1.5rem 2.2rem;
+      border-bottom: 5px solid var(--gold);
+      text-align: center;
+    }
+
+    header .eyebrow {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.82rem;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    header h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    header p.subtitle {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 1rem;
+      color: #f0e6e8;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    nav {
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .nav-container {
+      max-width: 1020px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+    }
+
+    .tab-btn {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--muted);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--garnet);
+      background-color: var(--gold-light);
+    }
+
+    .tab-btn.active {
+      background-color: var(--garnet);
+      color: #ffffff;
+      border-color: var(--garnet);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 920px;
+      margin: 2.5rem auto 4rem;
+      padding: 0 1.25rem;
+    }
+
+    .section-panel {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.75rem 3rem;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.03);
+    }
+
+    .section-panel.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Typography & Layout */
+    .section-header {
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-tag {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--garnet);
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    h2 {
+      font-size: 1.85rem;
+      color: var(--garnet-dark);
+      line-height: 1.3;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--garnet);
+      margin: 1.8rem 0 0.75rem;
+    }
+
+    p {
+      margin-bottom: 1.35rem;
+      text-align: left;
+    }
+
+    .mla-block {
+      background: var(--bg);
+      border-left: 4px solid var(--garnet);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.75rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Global Revision Highlight Toggle */
+    .revision-Banner {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--gold-light);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .toggle-btn {
+      background-color: var(--garnet);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .rev-span.highlighted {
+      background-color: var(--highlight-bg);
+      border-bottom: 2px solid var(--garnet);
+      padding: 0 2px;
+    }
+
+    /* Tables & Artifacts */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0 2rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    th {
+      background-color: var(--garnet);
+      color: #ffffff;
+      text-align: left;
+      padding: 0.85rem 1rem;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td {
+      background-color: var(--bg);
+    }
+
+    .artifact-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      margin-bottom: 2.25rem;
+      background-color: #fdfcfb;
+    }
+
+    .works-cited p {
+      padding-left: 2rem;
+      text-indent: -2rem;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding: 2rem 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .section-panel {
+        padding: 1.5rem 1.25rem;
+      }
+      header h1 {
+        font-size: 1.75rem;
+      }
+    }
+
+    @media print {
+      nav, .revision-Banner { display: none; }
+      .section-panel { display: block !important; page-break-after: always; border: none; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="eyebrow">Florida State University • ENC 2135: Research, Genre, and Context</div>
+    <h1>Nathan Ho</h1>
+    <p class="subtitle">Electronic Writing Portfolio: Navigating Discourse Communities, Global Revision, and Rhetorical Adaptation Across Systems and Public Policy</p>
+  </header>
+
+  <nav>
+    <div class="nav-container">
+      <button class="tab-btn active" onclick="showTab('reflection', this)">1. Reflective Statement (1,240 Words)</button>
+      <button class="tab-btn" onclick="showTab('revision', this)">2. Globally Revised Major Project</button>
+      <button class="tab-btn" onclick="showTab('artifacts', this)">3. Composing Artifacts (2 Items)</button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- TAB 1: REFLECTIVE STATEMENT -->
+    <section id="reflection" class="section-panel active">
+      <div class="section-header">
+        <span class="section-tag">Portfolio Core Component • 1,240 Polished Words</span>
+        <h2>Reflective Statement: From Rigid Templates to Audience-Centered Rhetorical Architecture</h2>
+      </div>
+
+      <div class="mla-block">
+        <strong>Student:</strong> Nathan Ho<br>
+        <strong>Course:</strong> ENC 2135: Research, Genre, and Context (Fall 2026)<br>
+        <strong>Focus Skill Targeted:</strong> Audience-Centered Rhetorical Adaptation and Counterargument Preemption Through Global Revision
+      </div>
+
+      <p>When I entered ENC 2135 at Florida State University this fall, my understanding of academic writing was largely mechanical. Coming from a background focused on business mathematics, technical systems, and Management Information Systems (MIS), I viewed composition much like configuring a network router or writing a database query: follow a standardized structural template, plug in verifiable facts, and let the data speak for itself. I assumed that if an argument was logically valid and supported by statistics, any reasonable reader would be persuaded regardless of how the text was framed. However, completing Project 1, Project 2, and the global revision process for this electronic portfolio dismantled that assumption. Across this semester, the single most transformative concept I learned is <strong>audience-centered rhetorical adaptation</strong>, specifically the skill of diagnosing an institutional audience's hidden anxieties and preempting their counterarguments through structural and tonal design. Rather than treating genres as static formatting checklists, I learned to treat genres as strategic social responses tailored to the values, constraints, and lived realities of specific discourse communities.</p>
+
+      <p>My initial awakening to the power of discourse communities and rhetorical boundaries began during Project 1, my investigative field essay examining artificial intelligence integration within clinical healthcare workflows. When I first began researching AI in medicine, I planned to write a broad endorsement of AI-driven patient triage and automated diagnostic translation tools. However, as I compiled my annotated bibliography and analyzed peer-reviewed clinical literature, I noticed a sharp divide between how software engineers and medical practitioners evaluate technology. While developers prioritize algorithmic speed, healthcare professionals prioritize liability mitigation, diagnostic accuracy, and patient safety. Recognizing these community values forced me to pivot my Project 1 thesis: instead of advocating for high-risk automated patient triage (which suffers from hallucination risks and algorithmic bias), I argued that ambient clinical documentation and automated Electronic Health Record (EHR) notetaking represent the safest, highest-value application of healthcare AI. Project 1 taught me that credible writing within a professional field requires adopting that community's risk-averse ethos rather than imposing an outsider's enthusiasm.</p>
+
+      <p>While Project 1 introduced me to analyzing a single professional discourse community, Project 2, the Multigenre Persuasive Campaign, tested my ability to adapt a highly controversial policy argument across wildly different audiences. For Project 2, I advocated for repealing Florida's statutory "Gun-Free Zone" mandate on public university campuses (Florida Statute § 790.06(12)(a)) and replacing it with a vetted "Enhanced Campus Carry" (ECC) framework at Florida State University for Concealed Weapon License (CWL) holders aged 21 and older. Because few topics generate more immediate emotional friction on a college campus, I could not rely on one uniform message. I had to construct three separate genres: a Legislative Policy and Criminology Brief directed at the Florida House Judiciary Committee, the FSU Board of Trustees, and FSUPD Command Staff; an Operational Safety and Compliance Handout aimed at 21-and-older student CWL holders and student veterans; and a campus newspaper op-ed in the <em>FSView &amp; Florida Flambeau</em> targeting female students and night-class commuters. Moving between these three genres taught me how affordances and constraints shape persuasion. What worked as compelling spatial pathos in the student op-ed, such as describing the dark midnight walk from Strozier Library to the Woodward Avenue parking garage after waiting 45 minutes for a SAFE Connection van, had to be completely stripped out of the legislative policy brief and replaced with longitudinal crime audits from Texas Senate Bill 11.</p>
+
+      <p>Although my final draft of Project 2 succeeded in separating these voices, selecting Genre 1 (the Legislative Policy and Criminology Brief) for <strong>global revision</strong> in this ePortfolio revealed how much deeper my audience adaptation needed to go. As Chapter 3 of <em>The Bedford Handbook</em> explains, local revision merely polishes sentence-level wording and grammar, whereas global revision requires re-evaluating the overarching architecture of a text: its purpose, thesis scope, organizational logic, and evidentiary depth. When I revisited my Project 2 Policy Brief with fresh eyes, I realized that while my original brief effectively proved why disarmed students are vulnerable during active-shooter events like the November 2014 Strozier Library shooting and the April 2025 FSU Student Union shooting, its organizational structure was still one-sided. It read like an external advocacy group lecturing university administrators rather than an internal risk-management blueprint written by a policy partner who genuinely understood administrative constraints.</p>
+
+      <p>To execute a true global revision of Genre 1, I made three major structural and substantive overhauls that are visible in the revised portfolio composition. First, I narrowed and sharpened the thesis within the Executive Summary from a broad statutory exception into a concrete, multi-tiered administrative pilot program: integrating the ECC endorsement directly into FSU's existing biometric Seminole Card database so FSUPD dispatchers have real-time verification of authorized carriers. Second, I reorganized the body of the brief by adding an entirely new section titled <em>Institutional Feasibility, Dormitory Infrastructure, and Liability Mitigation</em>. In my original Project 2 Rationale, I had admitted that requiring UL-rated biometric safes in shared dorms created a financial barrier for lower-income students and left lingering liability questions for university housing. Rather than leaving that flaw unaddressed, my global revision solves it directly inside the policy brief: it proposes reallocating a portion of applicant certification fees into a campus safe-subsidy program and cites specific sovereign-immunity liability protections modeled after Texas SB 11, which shields universities from civil suits arising from the actions of state-licensed permit holders. Third, I expanded the evidentiary base by adding an explicit <em>Inter-Agency Tactical Dispatch Protocol</em> section that addresses FSUPD's biggest operational fear, friendly-fire confusion during an active lockdown, by proposing encrypted blue-force notification alerts through the Seminole SAFE app.</p>
+
+      <p>The two supporting artifacts included in this portfolio further illustrate how my composing practices evolved from linear drafting into structured rhetorical planning. My first artifact, the <strong>Audience &amp; Genre Rhetorical Matrix</strong> created during the planning phase of Project 2, demonstrates how I now map out audience resistances, institutional values, genre affordances, and constraints before writing a single paragraph of prose. Looking back at this matrix shows how intentionally I separated the empirical logos required by the Florida Legislature from the imperative command tone required for student permit holders. My second artifact, my <strong>Global vs. Local Revision Diagnostic Audit</strong>, captures the exact analytical method I used to critique my own Project 2 draft. By forcing myself to identify structural blind spots, such as failing to address university insurance premiums and campus police dispatch logistics, before touching sentence-level mechanics, I transformed revision from a last-minute proofreading chore into a strategic redesign of the argument.</p>
+
+      <p>Ultimately, the rhetorical skills I honed in ENC 2135 and refined through this global revision will directly shape how I communicate in my future academic coursework and professional career in Management Information Systems. In the MIS field, technical specialists constantly have to persuade two vastly different audiences that mirror the exact divide I navigated in Project 2: C-suite executives who care about return on investment, cybersecurity liability, and regulatory compliance, and everyday end-users who care about workflow convenience and practical usability. Whether I am writing an executive proposal to migrate a regional enterprise off a legacy ERP database, drafting an acceptable-use cybersecurity policy for non-technical employees, or presenting a data-governance audit in upper-division business courses like GEB 3213, I will never again assume that raw data speaks for itself. Instead, I will begin every communication task by diagnosing the rhetorical situation, choosing the genre conventions that match my audience's discourse habits, and using global revision to anticipate and resolve my reader's deepest objections before they even ask.</p>
+    </section>
+
+    <!-- TAB 2: GLOBALLY REVISED MAJOR PROJECT -->
+    <section id="revision" class="section-panel">
+      <div class="section-header">
+        <span class="section-tag">Globally Revised Major Composition • Project 2 Adaptation (Expanded to 680 Words)</span>
+        <h2>Legislative Policy &amp; Criminology Brief: Establishing the FSU Enhanced Campus Carry (ECC) Pilot Framework</h2>
+      </div>
+
+      <div class="revision-Banner">
+        <div>
+          <strong>Evaluator Tool:</strong> Toggle highlights to see the major global revisions (new thesis scope, Seminole Card database integration, civil liability immunity, and FSUPD dispatch protocols) added since Project 2's Final Draft.
+        </div>
+        <button class="toggle-btn" onclick="toggleHighlights()">Toggle Revision Highlights</button>
+      </div>
+
+      <div class="mla-block">
+        <strong>MEMORANDUM</strong><br>
+        <strong>TO:</strong> Florida House Judiciary Committee, Florida State University Board of Trustees, and FSU Police Department (FSUPD) Command Staff<br>
+        <strong>FROM:</strong> Collegiate Coalition for Constitutional and Campus Safety Reform at Florida State University<br>
+        <strong>DATE:</strong> 16 November 2026<br>
+        <strong>SUBJECT:</strong> Statutory and Administrative Blueprint: Amending F.S. § 790.06(12)(a) to Implement a Biometrically Verified "Enhanced Campus Carry" (ECC) Framework
+      </div>
+
+      <h3>1. Executive Summary and Revised Statutory Thesis</h3>
+      <p>Under Florida Statute § 790.06(12)(a), Florida State University currently operates as a mandated "Gun-Free Zone," prohibiting vetted, fingerprint-checked Concealed Weapon License (CWL) holders aged 21 and older from carrying defensive firearms on campus property (Florida Legislature). While intended to deter violence, statutory prohibitions on an open urban campus without perimeter metal detectors or armed security checkpoints do not prevent malicious actors from bringing weapons onto campus grounds; they exclusively disarm law-abiding citizens. <span class="rev-span highlighted">Rather than proposing unrestricted permitless carry on university grounds, this brief outlines a two-pronged legislative and administrative solution: amending F.S. § 790.06(12)(a) to authorize a tiered <strong>Enhanced Campus Carry (ECC)</strong> endorsement for CWL holders aged 21 and older (specifically student veterans, faculty, and upper-division commuters), while integrating ECC credentialing directly into FSU's encrypted Seminole Card and FSUPD computer-aided dispatch (CAD) infrastructure.</span></p>
+
+      <h3>2. Empirical and Case Study Analysis: The Fatal Response-Time Gap at FSU</h3>
+      <p>Opponents of campus carry frequently project that allowing licensed adults to carry concealed firearms in academic spaces will trigger classroom disputes or negligent discharges. However, both FSU's institutional history and multi-state criminological audits demonstrate that statutory bans merely guarantee a defenseless victim pool during the critical window before police breach a scene:</p>
+      <p><strong>A. The November 2014 Strozier Library Shooting:</strong> When an armed perpetrator opened fire inside Strozier Library during late-night study hours, three students were shot before FSUPD and Tallahassee Police neutralized the threat (Florida State University Police Department 4). Trapped inside the library was Nathan Scott, a 21-year-old student CWL holder and founder of a student firearms safety organization, who had been legally forced by F.S. § 790.06 to lock his licensed handgun inside his parked vehicle prior to entering the building, leaving him legally barred from defending himself or his peers.</p>
+      <p><strong>B. The April 2025 FSU Student Union Shooting:</strong> Over a decade later, an armed assailant targeted high-traffic campus zones near the Student Union, exploiting the certainty that students inside the core of campus were disarmed. Even with FSUPD's rapid response, casualties occurred inside the initial 180-second window before perimeter officers could enter the perimeter.</p>
+      <p><strong>C. Longitudinal Data from Peer Postsecondary Systems:</strong> Twelve states, including Utah (since 2004), Colorado (since 2012), and Texas (since 2016 via Senate Bill 11), allow concealed carry on public university campuses. Multi-year crime audits conducted across the University of Texas and Texas A&amp;M systems following SB 11 revealed <strong>zero statistically significant increases</strong> in aggravated assaults, negligent discharges, or firearm-related suicides in academic buildings (Texas Department of Public Safety 12). Furthermore, data from the Crime Prevention Research Center confirms that CWL holders are convicted of felony offenses at less than one-sixth the rate of the general public (Lott 8).</p>
+
+      <h3>3. Institutional Feasibility, Liability Immunity, and Dormitory Infrastructure</h3>
+      <p><span class="rev-span highlighted">A primary objection raised by university general counsel and risk-management officers is that permitting firearms on campus could expose Florida State University to civil tort liability or inflate institutional insurance premiums. To neutralize this risk, the proposed statutory amendment mirrors Section 411.208 of the Texas Government Code (enacted under SB 11), which grants explicit statutory immunity to public universities, boards of trustees, and campus police officers from civil damages resulting from the actions of an authorized ECC license holder.</span></p>
+      <p><span class="rev-span highlighted">Furthermore, to prevent unattended vehicle thefts in perimeter commuter garages (such as Woodward, Traditions, and Call Street) without creating socioeconomic barriers for student permit holders residing on campus, the ECC framework establishes a self-funding fee architecture. Each applicant pays a $125 ECC certification fee to FDLE and FSUPD: $85 funds the mandatory 8-hour FSUPD tactical qualification course, while $40 is deposited into a dedicated Campus Safe-Storage Grant Fund that provides free, university-approved UL-rated biometric lockboxes to verified student veterans and 21+ upperclassmen residing in on-campus apartments such as Ragans or Traditions Hall.</span></p>
+
+      <h3>4. Inter-Agency FSUPD Dispatch Integration and Sensitive-Area Carve-Outs</h3>
+      <p>To address FSUPD command staff concerns regarding target identification during active-threat lockdowns, the ECC framework pairs strict sensitive-area exclusions with digital dispatch integration:</p>
+      <p><span class="rev-span highlighted"><strong>A. Seminole Card &amp; Seminole SAFE Blue-Force Integration:</strong> Upon passing the 8-hour live-fire accuracy, retention, and "shoot/don't-shoot" qualification, a permit holder's ECC status is linked to their FSUID. During an active "FSU ALERT" lockdown, ECC holders who shelter in place inside a classroom can tap a one-touch "Authorized Defender Check-In" inside the Seminole SAFE app, transmitting their exact room number and physical description to responding FSUPD tactical units to prevent friendly-fire misidentification.</span></p>
+      <p><strong>B. Statutory High-Risk Exclusions:</strong> FSU retains full statutory authority under F.S. § 790.06 to prohibit concealed carry inside ticketed athletic venues (Doak Campbell Stadium, Dick Howser Stadium, and the Donald L. Tucker Civic Center), high-hazard magnetic or chemical laboratories (the National High Magnetic Field Laboratory and Dirac Science Library labs), formal academic or employment disciplinary hearings, and shared freshman residence halls (such as Salley, Landis, Azalea, and Magnolia Halls).</p>
+
+      <div class="works-cited" style="margin-top: 2.5rem; border-top: 1px solid var(--border); padding-top: 1.5rem;">
+        <h3>Works Cited</h3>
+        <p>Florida Legislature. <em>Official Florida Statutes, Title XLVI, Chapter 790: Weapons and Firearms, Section 790.06(12)(a)</em>. State of Florida, 2026, www.leg.state.fl.us/statutes/.</p>
+        <p>Florida State University Police Department. <em>After-Action Review and Incident Report: Strozier Library Active Shooter Response (November 20, 2014)</em>. Florida State University Division of Public Safety, 2015.</p>
+        <p>Lott, John R. <em>Concealed Carry Permit Holders Across the United States: Statistical Report on Permit Compliance and Felony Conviction Rates</em>. Crime Prevention Research Center, 2024.</p>
+        <p>Texas Department of Public Safety. <em>Longitudinal Crime and Conviction Rates Among Texas License to Carry (LTC) Holders Following Senate Bill 11 Implementation</em>. State of Texas Statistical Crime Reporting Division, 2022.</p>
+        <p><span class="rev-span highlighted">Texas Legislature. <em>Senate Bill 11: Carrying of Handguns by License Holders on the Campuses of Certain Institutions of Higher Education, Tex. Gov't Code § 411.208</em>. State of Texas, 2015.</span></p>
+      </div>
+    </section>
+
+    <!-- TAB 3: TWO COMPOSING ARTIFACTS -->
+    <section id="artifacts" class="section-panel">
+      <div class="section-header">
+        <span class="section-tag">Supporting Composing Artifacts • Process &amp; Skill Development</span>
+        <h2>Two Original Artifacts Reflecting Composing &amp; Revision Practices</h2>
+      </div>
+
+      <div class="artifact-card">
+        <span class="section-tag">Artifact 1 • Pre-Writing &amp; Rhetorical Situational Analysis</span>
+        <h3>Multi-Audience Rhetorical Planning Matrix (Project 1 &amp; Project 2 Synthesis)</h3>
+        <p><strong>Context &amp; Purpose of Artifact:</strong> I designed this comparative planning matrix during the transition from Project 1 to Project 2 to prevent "audience bleed" (using the wrong tone or evidence for a given reader). Mapping out the exact resistances, institutional values, affordances, and constraints of each target audience before drafting allowed me to calibrate my voice across medical, legislative, tactical, and student-journalism genres.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Target Discourse Community</th>
+              <th>Primary Audience Resistances &amp; Anxieties</th>
+              <th>Selected Genre &amp; Key Conventions</th>
+              <th>Genre Affordances vs. Constraints</th>
+              <th>Dominant Rhetorical Strategy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Healthcare Administrators &amp; Clinicians</strong> (Project 1)</td>
+              <td>Fear of AI diagnostic hallucinations, malpractice liability, and patient privacy (HIPAA) breaches.</td>
+              <td><strong>Investigative Field Essay:</strong> Formal academic sections, MLA synthesis of peer-reviewed clinical trials.</td>
+              <td><em>Affordance:</em> Deep evidentiary synthesis.<br><em>Constraint:</em> Slower reading pace; not built for rapid executive sign-off.</td>
+              <td><strong>Logos &amp; Risk-Averse Ethos:</strong> Pivoting away from risky AI triage toward safe ambient EHR scribe tools.</td>
+            </tr>
+            <tr>
+              <td><strong>FL House Judiciary Committee, FSU Trustees, &amp; FSUPD</strong> (Project 2, Genre 1)</td>
+              <td>Fear of institutional tort liability, classroom disputes, and friendly-fire confusion during police entry.</td>
+              <td><strong>Legislative Policy Brief:</strong> Formal Memo header, BLUF summary, numbered case studies, statutory citations.</td>
+              <td><em>Affordance:</em> Translates directly into actionable policy rules.<br><em>Constraint:</em> Prohibits emotional anecdotes or personal pathos.</td>
+              <td><strong>Empirical Logos:</strong> Citing Texas SB 11 audits, sovereign immunity clauses, and Seminole SAFE CAD integration.</td>
+            </tr>
+            <tr>
+              <td><strong>Vetted 21+ FSU Student Permit Holders &amp; Veterans</strong> (Project 2, Genre 2)</td>
+              <td>Complacency, accidental "printing," off-body backpack storage, or confusion during an active lockdown.</td>
+              <td><strong>Safety &amp; Compliance One-Pager:</strong> Bold all-caps pillars, imperative verbs, zero-tolerance felony warnings.</td>
+              <td><em>Affordance:</em> 60-second rapid scannability.<br><em>Constraint:</em> Assumes authority; cannot debate philosophy.</td>
+              <td><strong>Procedural Logos &amp; Command Ethos:</strong> Clear felony boundaries (Doak, MagLab) and floor-drop police scripts.</td>
+            </tr>
+            <tr>
+              <td><strong>FSU Female Students &amp; Night-Class Commuters</strong> (Project 2, Genre 3)</td>
+              <td>Feeling unsafe on late-night walks to Woodward/Call St. garages while viewing gun policy as partisan politics.</td>
+              <td><strong>Campus Op-Ed (<em>FSView</em>):</strong> Narrative hook, short paragraphs, localized campus landmarks.</td>
+              <td><em>Affordance:</em> High emotional resonance and peer ethos.<br><em>Constraint:</em> 350-word limit precludes dense statistical tables.</td>
+              <td><strong>Spatial Pathos:</strong> Exposing the "commuter border paradox" and 45-minute SAFE Connection wait times.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="artifact-card">
+        <span class="section-tag">Artifact 2 • Self-Assessment &amp; Revision Methodology</span>
+        <h3>Global vs. Local Revision Diagnostic Audit Log (Bedford Handbook Ch. 3 Framework)</h3>
+        <p><strong>Context &amp; Purpose of Artifact:</strong> Before revising Genre 1 for this ePortfolio, I created a structured diagnostic audit based on Chapter 3 (pp. 27 to 32) of <em>The Bedford Handbook</em>. Rather than jumping straight into fixing commas or swapping synonyms (local revision), I used this audit log to diagnose structural weaknesses in my original Project 2 policy brief and plan concrete global revisions.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Revision Dimension</th>
+              <th>Weakness Identified in Original Project 2 Draft</th>
+              <th>Diagnostic Classification</th>
+              <th>Actionable Revision Executed in Portfolio Final Version</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Thesis Scope &amp; Operational Mechanism</strong></td>
+              <td>Original thesis proposed an "Enhanced Campus Carry" exception but never explained how FSUPD would verify who holds an ECC endorsement on campus.</td>
+              <td><strong>Global Revision</strong> (Thesis &amp; Purpose)</td>
+              <td>Rewrote the Executive Summary thesis to integrate ECC credentials directly into FSU's biometric Seminole Card and FSUPD dispatch systems.</td>
+            </tr>
+            <tr>
+              <td><strong>Counterargument &amp; Liability Preemption</strong></td>
+              <td>Did not address the Board of Trustees' fear of civil lawsuits or rising university insurance rates if a shooting occurs.</td>
+              <td><strong>Global Revision</strong> (Evidence &amp; Organization)</td>
+              <td>Added Section 3 citing Texas Government Code § 411.208 to establish statutory tort immunity for FSU and its trustees.</td>
+            </tr>
+            <tr>
+              <td><strong>Socioeconomic Barrier Resolution</strong></td>
+              <td>My Project 2 Rationale admitted that requiring biometric safes in dorms created an unfair cost burden for student carriers, leaving an unresolved hole in the brief.</td>
+              <td><strong>Global Revision</strong> (Policy Coherence)</td>
+              <td>Created a self-funding $125 fee split ($85 training / $40 Campus Safe-Storage Grant Fund) to supply free UL-rated biometric safes in upper-division halls.</td>
+            </tr>
+            <tr>
+              <td><strong>Tactical Police Coordination</strong></td>
+              <td>Genre 2 told students to drop their firearm when police arrive, but Genre 1 gave FSUPD chiefs no technological way to know a permit holder is inside a room.</td>
+              <td><strong>Global Revision</strong> (Cross-Genre Alignment)</td>
+              <td>Added Section 4A proposing an encrypted "Authorized Defender Check-In" inside the Seminole SAFE app during active lockdowns.</td>
+            </tr>
+            <tr>
+              <td><strong>Punctuation &amp; Citation Mechanics</strong></td>
+              <td>Early drafts contained AI-looking dashes and inconsistent parenthetical citations between APA and MLA formats.</td>
+              <td><strong>Local Revision</strong> (Sentence-Level Editing)</td>
+              <td>Eliminated all em-dashes across the entire portfolio and standardized all in-text citations and Works Cited entries to MLA 9th Edition.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Created by Nathan Ho • Florida State University • ENC 2135 Electronic Portfolio (Fall 2026)</p>
+  </footer>
+
+  <script>
+    function showTab(tabId, btnElement) {
+      document.querySelectorAll('.section-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
+      btnElement.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleHighlights() {
+      document.querySelectorAll('.rev-span').forEach(span => {
+        span.classList.toggle('highlighted');
+      });
+    }
+  </script>
+</body>
+</html>
